@@ -1,0 +1,100 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML Strorage</title>
+    <script>
+        function doFirst() {
+            let button = document.getElementById("button");
+            button.addEventListener("click", save, false);
+            display();
+        }
+
+        function save() {
+            let username = document.getElementById("username").value,
+                valueinput = document.getElementById("password").value + " " + document.getElementById("email").value;
+                sessionStorage.setItem(username, valueinput);
+            display();
+            username.value = "";
+            valueinput.value = "";
+        }
+
+        function display() {
+            let display_data = document.getElementById("display_data");
+            display_data.innerHTML = "";
+            for (let i = 0; i < sessionStorage.length; i++) {
+                let a = sessionStorage.key(i);
+                let b = sessionStorage.getItem(a);
+                console.log(sessionStorage);
+                display_data.innerHTML += a + " - " + b + "<br>";
+            }
+        }
+
+        function clear() {
+            sessionStorage.clear();
+            location.reload();
+        }
+
+        window.addEventListener("load", doFirst, false);
+    </script>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 15%;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 97%;
+            height: 20px;
+            border-radius: 5px;
+        }
+
+        input[type="password"] {
+            width: 97%;
+            height: 20px;
+            border-radius: 5px;
+        }
+
+        input[type="email"] {
+            width: 97%;
+            height: 20px;
+            border-radius: 5px;
+        }
+
+        #box {
+            width: 270px;
+            padding: 10px;
+            background: gray;
+            border-radius: 5px;
+            margin: auto;
+            overflow: auto;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <h1>HTML Storage</h1>
+    <section id="box">
+        <form>
+            <p>Username: <br> <input type="text" id="username"></p>
+            <p>Password: <br> <input type="password" id="password" minlength="8" placeholder="8 charaters minimum"></p>
+            <p>Email: <br> <input type="email" id="email"></p>
+            <p><input type="submit" id="button" value="Submit"></p> 
+            <a href="javascript:clear()">Reset</a>
+        </form>
+    </section>
+    <br>
+    <section id="display_data">
+
+    </section>
+</body>
+</html>
